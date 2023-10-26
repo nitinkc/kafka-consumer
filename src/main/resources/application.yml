@@ -1,0 +1,40 @@
+server:
+  port: 8090
+
+com:
+  topic:
+    simple: my.simple.topic
+    student: reg.student.engineering
+  group: hostel-group
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${com.group}
+      auto-offset-reset: earliest
+    template:
+      default:
+        default-topic: ${com.topic.simple}
+      anotherTemplate:
+        default-topic: ${com.topic.student}
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: "test"
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/mydb
+      username: dbuser
+      password: a
+    hibernate:
+      show-sql: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: dbuser
+    password:
