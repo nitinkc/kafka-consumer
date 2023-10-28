@@ -1,0 +1,7 @@
+server:
+  port: 8090
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    # This is the kafka Port number using Docker-compose.yml
