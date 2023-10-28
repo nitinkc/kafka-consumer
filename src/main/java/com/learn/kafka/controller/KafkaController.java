@@ -2,6 +2,7 @@ package com.learn.kafka.controller;
 
 import com.learn.kafka.dto.KafkaMessageDTO;
 import com.learn.kafka.service.KafkaConsumerService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,17 +13,17 @@ import java.util.List;
 public class KafkaController {
     private final KafkaConsumerService consumerService;
 
+    @Value("${server.port}")
+    String portNumber;
+
     public KafkaController(KafkaConsumerService consumerService) {
         this.consumerService = consumerService;
     }
 
-    @GetMapping(("/messages"))
-    public List<KafkaMessageDTO> getMessages() {
-        List<String> messages = consumerService.getMessages();
-        List<KafkaMessageDTO> messageDTOs = new ArrayList<>();
-        for (String message : messages) {
-            messageDTOs.add(new KafkaMessageDTO(message));
-        }
-        return messageDTOs;
+    @GetMapping(("/"))
+    public String getMessages() {
+        String str = "Consumer is Listening on port " + portNumber;
+        System.out.println(str);
+        return str;
     }
 }

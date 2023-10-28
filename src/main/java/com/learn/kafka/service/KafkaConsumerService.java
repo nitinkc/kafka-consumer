@@ -42,7 +42,7 @@ public class KafkaConsumerService {
     }
 
     @KafkaListener(topics = "${com.topic.student}", groupId = "${com.group}")
-    public void handleStudentMessage(String message) {
+    public int handleStudentMessage(String message) {
         // Process the received message
         System.out.println("Received message: " + message);
 
@@ -53,10 +53,11 @@ public class KafkaConsumerService {
         StudentData studentData = convertor.convertStudentDtoToStudentData(studentDto);
 
         // Save the data in the database
-        studentRepository.save(studentData)
-    }
+        StudentData savedStudent = studentRepository.save(studentData);
 
-    public List<String> getMessages() {
-        return receivedMessages;
+        int idx = savedStudent.getIdx();
+        System.out.println("Save the Data with Index : " + idx);
+
+        return idx;
     }
 }
