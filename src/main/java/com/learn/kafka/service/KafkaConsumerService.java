@@ -53,7 +53,7 @@ public class KafkaConsumerService {
         StudentData studentData = convertor.convertStudentDtoToStudentData(studentDto);
 
         // Save the data in the database
-        StudentData save = studentRepository.save(studentData);
+        studentRepository.save(studentData)
     }
 
     public List<String> getMessages() {
