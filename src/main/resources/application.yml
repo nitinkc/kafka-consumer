@@ -19,7 +19,6 @@ spring:
       anotherTemplate:
         default-topic: ${com.topic.student}
 
-
   jpa:
     properties:
       hibernate:
